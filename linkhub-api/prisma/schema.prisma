@@ -1,0 +1,34 @@
+// Esto le dice a Prisma con qué cliente de TS debe generarse
+generator client {
+  provider = "prisma-client-js"
+}
+
+// Esto define la conexión a nuestra base de datos
+datasource db {
+  provider = "postgresql" // Usaremos PostgreSQL
+  url      = env("DATABASE_URL") // Toma la URL desde el .env
+}
+
+// ------ NUESTROS MODELOS DE DATOS ------
+
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  username  String   @unique
+  password  String   
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  links Link[]
+}
+
+model Link {
+  id        String   @id @default(cuid())
+  title     String
+  url       String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  User   User   @relation(fields: [userId], references: [id])
+  userId String
+}

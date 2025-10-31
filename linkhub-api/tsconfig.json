@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    /* Opciones Base */
+    "target": "es2020", // Compila a una versión moderna de JS
+    "module": "commonjs", // El sistema de módulos estándar de Node.js
+    "strict": true, // ¡LA MÁS IMPORTANTE! Activa todas las reglas estrictas de tipos.
+    "esModuleInterop": true, // Mejora la compatibilidad con módulos de JS
+    "forceConsistentCasingInFileNames": true,
+    "skipLibCheck": true,
+
+    /* Dónde está tu código */
+    //"rootDir": "./src", // Tu código TS vivirá aquí
+    "outDir": "./dist", // Tu código JS compilado irá aquí
+
+    /* Opcional: para decoradores (lo usaremos después) */
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true
+  },
+  "include": ["src/**/*", "prisma.config.ts"], // Solo compila lo que esté en la carpeta src
+  "exclude": ["node_modules"] // Ignora esto
+}

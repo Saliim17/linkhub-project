@@ -1,0 +1,86 @@
+### Registrar un nuevo usuario
+POST http://192.168.1.40:3000/auth/register
+Content-Type: application/json
+
+{
+  "email": "test@gmail.com",
+  "username": "testuser",
+  "password": "password123"
+}
+
+### Hacer login
+# @name loginUser
+POST http://192.168.1.40:3000/auth/login
+Content-Type: application/json
+
+{
+  "email": "test@gmail.com",
+  "password": "password123"
+}
+
+### ---
+
+### Obtener links sin token
+GET http://192.168.1.40:3000/links
+
+### Obtener links con token
+### Crear un nuevo link (protegido)
+
+POST http://192.168.1.40:3000/links
+Content-Type: application/json
+Authorization: Bearer {{loginUser.response.body.token}}
+
+{
+  "title": "Mi Portafolio",
+  "url": "https://mi-portafolio.com"
+}
+
+### ---
+
+### Obtener mis links (protegido)
+GET http://192.168.1.40:3000/links
+Authorization: Bearer {{loginUser.response.body.token}}
+
+### ------------------
+### TEST COMPLETO DE CRUD
+### ------------------
+
+# Primero, crea un link para tener un ID
+# @name createForTest
+POST http://192.168.1.40:3000/links
+Content-Type: application/json
+Authorization: Bearer {{loginUser.response.body.token}}
+
+{
+  "title": "Link para borrar",
+  "url": "https://google.com"
+}
+
+### ---
+
+# Ahora, usa el ID de la respuesta de arriba para actualizarlo
+# Reemplaza <ID_DEL_LINK_CREADO> con el ID real
+@linkId = {{createForTest.response.body.id}}
+
+PUT http://192.168.1.40:3000/links/{{linkId}}
+Content-Type: application/json
+Authorization: Bearer {{loginUser.response.body.token}}
+
+{
+  "title": "Link ACTUALIZADO",
+  "url": "https://bing.com"
+}
+
+### ---
+
+# Finalmente, borra ese mismo link
+DELETE http://192.168.1.40:3000/links/{{linkId}}
+Authorization: Bearer {{loginUser.response.body.token}}
+
+### ------------------
+### PRUEBA PÚBLICA
+### ------------------
+
+# Asegúrate de usar el 'username' que creaste
+# (probablemente "testuser")
+GET http://192.168.1.40:3000/testuser

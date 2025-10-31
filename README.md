@@ -1,48 +1,44 @@
 # 🚀 Project LinkHub
 
-Un clon de Linktree / gestor de perfiles 'link-in-bio' construido como un proyecto de aprendizaje Full-Stack 100% en TypeScript.
+A Linktree clone / 'link-in-bio' profile manager built as a Full-Stack 100% TypeScript learning project.
 
-Este repositorio es un **monorepo** que contiene:
+This repository is a **monorepo** containing:
 
-1.  **`/linkhub-api`**: Un backend API robusto.
-2.  **`/linkhub-app`**: Un frontend de administración.
+1.  **`/linkhub-api`**: A robust backend API.
+2.  **`/linkhub-app`**: An admin frontend.
 
 ---
 
-## 🛠️ Stack Tecnológico
+## 🛠️ Tech Stack
 
 ### Backend (`/linkhub-api`)
 
 * **Framework:** Fastify
-* **Lenguaje:** TypeScript (Strict)
-* **Base de Datos:** PostgreSQL
+* **Language:** TypeScript (Strict)
+* **Database:** PostgreSQL
 * **ORM:** Prisma
-* **Autenticación:** JWT (JSON Web Tokens)
-* **Validación:** Zod
-* **Calidad de Código:** ESLint, Prettier
+* **Authentication:** JWT (JSON Web Tokens)
+* **Validation:** Zod
+* **Code Quality:** ESLint, Prettier
 
 ### Frontend (`/linkhub-app`)
 
 * **Framework:** React
-* **Lenguaje:** TypeScript
+* **Language:** TypeScript
 * **Bundler:** Vite
-* **Calidad de Código:** ESLint, Prettier
+* **Code Quality:** ESLint, Prettier
 
 ---
 
-## 🏁 Cómo Empezar
+## 🏁 Getting Started
 
-### 1. Iniciar el Backend (API)
+### 1. Start the Backend (API)
 
 ```bash
-# Terminal 1 (Base de Datos)
+# Terminal 1 (Database)
 cd linkhub-api
 npx prisma dev
 
-# Terminal 2 (Servidor API)
+# Terminal 2 (API Server)
 cd linkhub-api
-npm run dev
-
-# Terminal 3 (React App)
-cd linkhub-app
 npm run dev

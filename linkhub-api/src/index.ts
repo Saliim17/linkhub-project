@@ -1,4 +1,5 @@
 import fastify from 'fastify';
+import cors from '@fastify/cors';
 import {
   registerUserHandler,
   loginHandler,
@@ -12,9 +13,8 @@ import {
   deleteLinkHandler,
 } from './modules/link/link.controller';
 
-// --- AUMENTACIÓN DE TIPOS ---
-// Le decimos a TypeScript que el objeto Request de Fastify
-// ahora puede tener una propiedad 'user'
+// --- TYPES AUGMENTATION ---
+// Tells TypeScript that the Fastify Request object now has a 'user' property
 declare module 'fastify' {
   interface FastifyRequest {
     user?: {
@@ -24,14 +24,24 @@ declare module 'fastify' {
     };
   }
 }
-// --- FIN DE AUMENTACIÓN ---
+// --- END TYPES AUGMENTATION ---
 
 const app = fastify({
   logger: true,
 });
 
-// --- RUTAS ---
-// Rutas públicas (login/register)
+// --- REGISTER CORS PLUGIN (FIXES NETWORK ERROR) ---
+// This allows the frontend (port 5173) to communicate with the API (port 3000)
+app.register(cors, {
+  origin: true, // Allows all origins (safe for development)
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], // Allow all necessary HTTP methods
+});
+// --------------------------------------------------
+
+
+// --- ROUTES ---
+// Public routes (login/register)
 app.get('/health', async (_request, _reply) => {
   return { status: 'ok' };
 });
@@ -39,23 +49,21 @@ app.post('/auth/register', registerUserHandler);
 app.post('/auth/login', loginHandler);
 app.get('/:username', getPublicProfileHandler);
 
-// Rutas protegidas (requieren token)
+// Protected routes (require token)
 app.register(async function (protectedRoutes) {
-  // 1. Añadimos el guardián.
-  // ¡Este 'hook' se ejecutará en TODAS las rutas
-  // registradas dentro de esta función!
+  // 1. Add the authentication hook: runs before every route in this group
   protectedRoutes.addHook('onRequest', authHook);
 
-  // 2. Definimos las rutas protegidas
+  // 2. Define the protected routes
   protectedRoutes.post('/links', createLinkHandler);
   protectedRoutes.get('/links', getLinksHandler);
   protectedRoutes.put('/links/:id', updateLinkHandler);
   protectedRoutes.delete('/links/:id', deleteLinkHandler);
 });
 
-// --- FIN DE RUTAS ---
+// --- END ROUTES ---
 
-// --- INICIO ---
+// --- BOOTSTRAP ---
 const main = async () => {
   try {
     await app.listen({ port: 3000, host: '0.0.0.0' });

@@ -3,12 +3,3 @@ node_modules/
 dist/
 .env
 npm-debug.log
-
-# Flutter (Frontend)
-.dart_tool/
-.idea/
-.metadata
-build/
-*.iml
-*.flutter-plugins
-*.flutter-plugins-dependencies

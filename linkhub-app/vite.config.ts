@@ -1,13 +1,14 @@
 import { defineConfig } from 'vitest/config';
 import react from '@vitejs/plugin-react';
+import tailwindcss from '@tailwindcss/vite';
+import path from 'path';
 
 export default defineConfig({
-  plugins: [react()],
+  plugins: [react(), tailwindcss()],
   test: {
-    // <-- BLOQUE A AÑADIR
     globals: true,
-    environment: 'jsdom', // Simula un entorno de navegador
-    setupFiles: ['./src/setupTests.ts'],
+    environment: 'jsdom',
+    setupFiles: path.resolve(__dirname, './src/setupTests.ts'),
     css: true,
   },
 });

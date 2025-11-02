@@ -2,10 +2,11 @@
 
 A Linktree clone / 'link-in-bio' profile manager built as a Full-Stack 100% TypeScript learning project.
 
-This repository is a **monorepo** containing:
 
-1.  **`/linkhub-api`**: A robust backend API.
-2.  **`/linkhub-app`**: An admin frontend.
+This repository is a **Monorepo Full-Stack TypeScript** containing:
+
+1.  **`/linkhub-api`**: A robust backend API. **(Fastify, Prisma, Zod)** 
+2.  **`/linkhub-app`**: An admin frontend. **(React, Vite)**.
 
 ---
 

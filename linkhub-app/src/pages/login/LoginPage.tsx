@@ -58,7 +58,7 @@ export function LoginPage() {
 
   return (
     <div>
-      <h2>Login</h2>
+      <h2 className="text-3xl font-bold text-blue-500">Login</h2>
       <form onSubmit={handleSubmit}>
         {/* Input for Email */}
         <div>

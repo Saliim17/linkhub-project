@@ -2,7 +2,7 @@ import './App.css';
 import { RegisterPage } from './pages/register/RegisterPage';
 import { LoginPage } from './pages/login/LoginPage';
 import { Routes, Route, Navigate } from 'react-router-dom';
-import { DashboardPage } from './pages/dashboard/DashboardPage';
+import  DashboardPage  from './pages/dashboard/DashboardPage';
 import { ProtectedRoute } from './components/ProtectedRoute';
 
 function App() {

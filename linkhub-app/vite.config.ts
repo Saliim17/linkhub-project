@@ -7,7 +7,7 @@ export default defineConfig({
     // <-- BLOQUE A AÑADIR
     globals: true,
     environment: 'jsdom', // Simula un entorno de navegador
-    setupFiles: './src/setupTests.ts',
+    setupFiles: ['./src/setupTests.ts'],
     css: true,
   },
 });

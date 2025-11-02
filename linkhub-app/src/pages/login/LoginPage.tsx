@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 // Define the type for a successful response (the JWT token)
 interface LoginResponse {
@@ -15,6 +16,7 @@ interface ErrorResponse {
 const API_URL = 'http://192.168.1.40:3000';
 
 export function LoginPage() {
+  const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState<string | null>(null);
@@ -36,8 +38,9 @@ export function LoginPage() {
       const token = response.data.token;
       localStorage.setItem('linkhub_token', token);
 
-      console.log('Login successful. Token saved:', token);
-      alert('Login successful! Token saved locally.');
+      //console.log('Login successful. Token saved:', token);
+      alert('Login successful!');
+      navigate('/dashboard');
     } catch (err) {
       // 3. Error handling: Use the Axios type guard
       if (axios.isAxiosError(err) && err.response) {

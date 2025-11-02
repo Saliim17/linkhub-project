@@ -2,11 +2,26 @@
 
 A Linktree clone / 'link-in-bio' profile manager built as a Full-Stack 100% TypeScript learning project.
 
+This repository is a **Full-Stack TypeScript Monorepo** containing:
 
-This repository is a **Monorepo Full-Stack TypeScript** containing:
+1.  **`/linkhub-api`**: A robust backend API **(Fastify, Prisma, Zod)**
+2.  **`/linkhub-app`**: A React admin dashboard **(React, Vite, Vitest)**
 
-1.  **`/linkhub-api`**: A robust backend API. **(Fastify, Prisma, Zod)** 
-2.  **`/linkhub-app`**: An admin frontend. **(React, Vite)**.
+---
+
+## ✨ Core Features
+
+* **Backend (API):**
+    * Complete User Authentication (Register & Login) with JWT.
+    * Protected CRUD (Create, Read, Update, Delete) endpoints for Links.
+    * Publicly accessible profile route (`/:username`) to display links.
+* **Frontend (App):**
+    * Token-based authentication flow (Login, Register, Logout).
+    * Protected routing to secure the dashboard.
+    * API data fetching with `axios` to display user links.
+* **DevOps:**
+    * Full CI/CD pipeline with GitHub Actions.
+    * Automated linting, testing, and building for the frontend.
 
 ---
 
@@ -16,7 +31,7 @@ This repository is a **Monorepo Full-Stack TypeScript** containing:
 
 * **Framework:** Fastify
 * **Language:** TypeScript (Strict)
-* **Database:** PostgreSQL
+* **Database:** PostgreSQL (managed by Prisma)
 * **ORM:** Prisma
 * **Authentication:** JWT (JSON Web Tokens)
 * **Validation:** Zod
@@ -27,11 +42,16 @@ This repository is a **Monorepo Full-Stack TypeScript** containing:
 * **Framework:** React
 * **Language:** TypeScript
 * **Bundler:** Vite
+* **Routing:** React Router DOM
+* **Testing:** Vitest & React Testing Library
+* **Data Fetching:** Axios
 * **Code Quality:** ESLint, Prettier
 
 ---
 
 ## 🏁 Getting Started
+
+To run this project, you will need **three** separate terminals.
 
 ### 1. Start the Backend (API)
 
@@ -43,3 +63,13 @@ npx prisma dev
 # Terminal 2 (API Server)
 cd linkhub-api
 npm run dev
+```
+The API will be running at http://localhost:3000
+
+### 2. Start the Frontend (App)
+```
+# Terminal 3 (React App)
+cd linkhub-app
+npm run dev
+```
+The React app will be running at http://localhost:5173

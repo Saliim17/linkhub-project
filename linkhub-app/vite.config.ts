@@ -16,9 +16,10 @@ export default defineConfig({
     ],
     coverage: {
       provider: 'v8',
-      reporter: ['text', 'json', 'html'],
+      reporter: ['text', 'json-summary', 'json', 'html'],
       include: ['src/**/*.{ts,tsx}', 'src/**/*.{test,spec}.{ts,tsx}'],
       exclude: ['src/main.tsx', 'src/setupTests.ts', 'src/**/*.test.tsx'],
+      reportOnFailure: true,
     },
   },
 });

@@ -29,8 +29,8 @@ jobs:
         run: npm run lint
         working-directory: ./linkhub-app
 
-      - name: Run Tests
-        run: npm run test
+      - name: Run Tests and Check Coverage
+        run: npm run coverage
         working-directory: ./linkhub-app
 
 

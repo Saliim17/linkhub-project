@@ -1,6 +1,9 @@
 import { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { API_URL } from '../config';
+
+
 
 // Define the type for a successful response (the JWT token)
 interface LoginResponse {
@@ -12,8 +15,6 @@ interface ErrorResponse {
   message: string;
 }
 
-// **IMPORTANT!** Use the local IP that worked for you (or localhost:3000)
-const API_URL = 'http://192.168.1.40:3000';
 
 export function LoginPage() {
   const navigate = useNavigate();

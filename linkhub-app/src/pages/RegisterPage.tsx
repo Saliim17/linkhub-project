@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import axios from 'axios';
 import { useNavigate, Link } from 'react-router-dom'; // <-- Importar Link y useNavigate
+import { API_URL } from '../config';
 
 interface RegisterResponse {
   id: string; // The API returns the user object on successful registration
@@ -9,7 +10,6 @@ interface RegisterResponse {
 interface ErrorResponse {
   message: string;
 }
-const API_URL = 'http://192.168.1.40:3000'; 
 
 export function RegisterPage() {
   const navigate = useNavigate();

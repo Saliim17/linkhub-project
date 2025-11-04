@@ -1,17 +1,14 @@
 import { Navigate } from 'react-router-dom';
+import { validateToken } from '../utils/auth'; // Ajusta la ruta según tu proyecto
 
-// This component takes other components as "children"
 export function ProtectedRoute({ children }: { children: React.ReactNode }) {
-  // Check for the token in localStorage
   const token = localStorage.getItem('linkhub_token');
 
-  // 1. If the token does NOT exist...
-  if (!token) {
-    // ...redirect the user to the /login page
+  // Si no hay token o el token no es válido
+  if (!token || !validateToken(token)) {
     return <Navigate to="/login" replace />;
   }
 
-  // 2. If the token EXISTS...
-  // ...show the child component they were trying to access
+  // Si el token es válido, renderizamos los hijos
   return <>{children}</>;
 }

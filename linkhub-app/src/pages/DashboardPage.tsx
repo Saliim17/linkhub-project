@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { API_URL } from '../config';
 
 interface LinkItem {
   id: string;
@@ -8,9 +9,6 @@ interface LinkItem {
   url: string;
   createdAt: string;
 }
-
-// ✅ Usa la variable del entorno o una URL local por defecto
-const API_URL = import.meta.env.VITE_API_URL ?? 'http://192.168.1.40:3000';
 
 export default function DashboardPage() {
   const navigate = useNavigate();
@@ -25,12 +23,10 @@ export default function DashboardPage() {
       const token = localStorage.getItem('linkhub_token');
       console.log('Token encontrado:', token);
 
-      // ✅ Evita redirecciones en tests (cuando VITE_API_URL === "test")
+      // 🚪 Si no hay token, redirige siempre a /login
       if (!token) {
         console.log('🚪 No token -> redirigiendo a /login');
-        if (import.meta.env.VITE_API_URL !== 'test') {
-          navigate('/login');
-        }
+        navigate('/login');
         return;
       }
 
@@ -52,9 +48,7 @@ export default function DashboardPage() {
         if (axios.isAxiosError(err) && err.response?.status === 401) {
           localStorage.removeItem('linkhub_token');
           setError('Your session expired. Please log in again.');
-          if (import.meta.env.VITE_API_URL !== 'test') {
-            navigate('/login');
-          }
+          navigate('/login');
         } else {
           setError('Failed to load links.');
         }

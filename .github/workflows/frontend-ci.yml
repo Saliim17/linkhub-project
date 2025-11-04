@@ -6,13 +6,22 @@ on:
   pull_request:
     branches: [ "main" ]
 
+permissions:
+  contents: read
+  pull-requests: write
+
 jobs:
   build-and-test:
     runs-on: ubuntu-latest
 
     steps:
+      # -----------------------------------------------------------------
+      # 0. SETUP ENVIRONMENT
+      # -----------------------------------------------------------------
       - name: Checkout code
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -21,6 +30,9 @@ jobs:
           cache: 'npm'
           cache-dependency-path: linkhub-app/package-lock.json
 
+      # -----------------------------------------------------------------
+      # 1. INSTALL, LINT, BUILD, TEST (PR or Push)
+      # -----------------------------------------------------------------
       - name: Install dependencies
         run: npm ci
         working-directory: ./linkhub-app
@@ -29,11 +41,95 @@ jobs:
         run: npm run lint
         working-directory: ./linkhub-app
 
-      - name: Run Tests and Check Coverage
-        run: npm run coverage
-        working-directory: ./linkhub-app
-
-
       - name: Run Build
         run: npm run build
         working-directory: ./linkhub-app
+
+      - name: Run Tests with Coverage
+        run: npx vitest run --coverage
+        working-directory: ./linkhub-app
+
+      - name: Store PR Coverage Reports
+        run: |
+          mkdir -p coverage-artifacts
+          cp linkhub-app/coverage/coverage-summary.json coverage-artifacts/pr-summary.json || echo "{}" > coverage-artifacts/pr-summary.json
+          cp linkhub-app/coverage/coverage-final.json coverage-artifacts/pr-final.json || echo "{}" > coverage-artifacts/pr-final.json
+
+      # -----------------------------------------------------------------
+      # 2. RUN COVERAGE ON MAIN BRANCH (for comparison)
+      # -----------------------------------------------------------------
+      - name: Fetch and checkout main branch
+        run: |
+          git fetch origin main
+          git checkout origin/main --force
+
+      - name: Install dependencies (main)
+        run: npm ci
+        working-directory: ./linkhub-app
+
+      - name: Run Coverage (main)
+        run: npx vitest run --coverage || echo "Main coverage run failed or vite.config.ts missing"
+        working-directory: ./linkhub-app
+
+      - name: Store main coverage summary report
+        run: |
+          cp linkhub-app/coverage/coverage-summary.json coverage-artifacts/main-summary.json || echo "{}" > coverage-artifacts/main-summary.json
+
+      # -----------------------------------------------------------------
+      # 3. POST COVERAGE COMMENT
+      # -----------------------------------------------------------------
+      - name: Post Coverage Detail Report
+        if: always()
+        uses: davelosert/vitest-coverage-report-action@v2
+        with:
+          name: Frontend Coverage Report
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          vite-config-path: ./linkhub-app/vite.config.ts
+          json-summary-path: coverage-artifacts/pr-summary.json
+          json-final-path: coverage-artifacts/pr-final.json
+          json-summary-compare-path: coverage-artifacts/main-summary.json
+
+      # -----------------------------------------------------------------
+      # 4. VALIDATE COVERAGE THRESHOLD (Dynamic by event)
+      # -----------------------------------------------------------------
+      - name: Validate minimum coverage threshold
+        run: |
+          if [ "${{ github.event_name }}" = "pull_request" ]; then
+            MIN_COVERAGE=90
+          else
+            MIN_COVERAGE=80
+          fi
+
+          echo "Required minimum coverage: ${MIN_COVERAGE}%"
+          COVERAGE=$(jq '.total.lines.pct' coverage-artifacts/pr-summary.json)
+          echo "Actual coverage: ${COVERAGE}%"
+
+          if (( $(echo "$COVERAGE < $MIN_COVERAGE" | bc -l) )); then
+            echo "❌ Coverage below ${MIN_COVERAGE}% threshold."
+            exit 1
+          else
+            echo "✅ Coverage meets ${MIN_COVERAGE}% threshold."
+          fi
+
+      # -----------------------------------------------------------------
+      # 5. UPLOAD COVERAGE TO CODECOV
+      # -----------------------------------------------------------------
+      - name: Upload coverage to Codecov
+        if: always()
+        uses: codecov/codecov-action@v4
+        with:
+          files: coverage-artifacts/pr-final.json
+          flags: frontend
+          name: Frontend CI Coverage
+          fail_ci_if_error: false
+          verbose: true
+
+      # -----------------------------------------------------------------
+      # 6. CLEANUP AND SUMMARY
+      # -----------------------------------------------------------------
+      - name: Cleanup and Summary
+        if: always()
+        run: |
+          echo "🧹 Cleaning up temporary files..."
+          rm -rf linkhub-app/coverage || true
+          echo "✅ CI process completed successfully."

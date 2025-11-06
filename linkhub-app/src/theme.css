@@ -1,0 +1,68 @@
+/*
+  Global CSS variables for light/dark theme.
+  These mirror the custom colors defined in tailwind.config.js so you can
+  use CSS variables in plain CSS (and get consistent values with Tailwind
+  utility classes like `bg-background` / `dark:bg-background`).
+
+  The .dark class is applied on the <html> element by the ThemeProvider,
+  so the variables switch automatically when toggling the theme.
+*/
+
+:root {
+  /* Primary */
+  --color-primary: #1E3A8A; /* primary.light */
+
+  /* Background & text */
+  --color-background: #F3F4F6; /* background.light (Gris más notable para contraste) */
+  --color-text: #111827;       /* text.light */
+
+  /* Button */
+  --color-button: #3B82F6; /* button.light */
+  --color-text-button: #FFFFFF; /* textButton.light */
+
+  /* Borders */
+  --color-border: #E5E7EB; /* borderColor.light */
+
+  /* Input */
+  --color-input-bg: #FFFFFF;   /* input.bg.light (Ahora blanco para contrastar) */
+  --color-input-text: #111827; /* input.text.light */
+  --color-input-border: #D1D5DB; /* input.border.light */
+  --color-input-focus: #2563EB; /* input.focus.light */
+
+  /* Card */
+  --color-card-bg: #FFFFFF;   /* card.bg.light (Ahora blanco) */
+  --color-card-hover: #F9FAFB; /* card.hover.light */
+
+  /* Hover variants (buttons) */
+  --color-hover-button: #2563EB; /* hover.button.light */
+
+  /* Feedback */
+  --color-error: #DC2626; /* error.light */
+  --color-success: #16A34A; /* success.light */
+}
+
+/* Dark theme overrides (applied when <html> has the `dark` class) */
+html.dark {
+  --color-primary: #93C5FD; /* primary.dark */
+  
+  --color-background: #111827; /* background.dark (Ahora más oscuro) */
+  --color-text: #D1D5DB;       /* text.dark */
+
+  --color-button: #2563EB; /* button.dark */
+  --color-text-button: #F3F4F6; /* textButton.dark */
+
+  --color-border: #374151; /* borderColor.dark */
+
+  --color-input-bg: #374151; /* input.bg.dark */
+  --color-input-text: #F9FAFB; /* input.text.dark */
+  --color-input-border: #4B5563; /* input.border.dark */
+  --color-input-focus: #60A5FA; /* input.focus.dark */
+
+  --color-card-bg: #1F2937; /* card.bg.dark (El color de fondo anterior) */
+  --color-card-hover: #4B5563; /* card.hover.dark */
+
+  --color-hover-button: #3B82F6; /* hover.button.dark */
+
+  --color-error: #EF4444; /* error.dark */
+  --color-success: #22C55E; /* success.dark */
+}

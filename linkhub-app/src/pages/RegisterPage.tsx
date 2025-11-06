@@ -1,7 +1,11 @@
 import { useState } from 'react';
 import axios from 'axios';
-import { useNavigate, Link } from 'react-router-dom'; // <-- Importar Link y useNavigate
+import { useNavigate } from 'react-router-dom';
+import { Input } from '../components/Input';
+import AuthForm from '../components/AuthForm';
+import AuthFooter from '../components/AuthFooter';
 import { API_URL } from '../config';
+import Button from '../components/Button';
 
 interface RegisterResponse {
   id: string; // The API returns the user object on successful registration
@@ -51,92 +55,50 @@ export function RegisterPage() {
 
   // --- BLOQUE 'RETURN' ACTUALIZADO CON TAILWIND ---
   return (
-    <div className="min-h-screen bg-gray-900 text-gray-100 flex items-center justify-center p-4">
-      <div className="w-full max-w-md">
-        <div className="bg-gray-800 p-8 rounded-xl shadow-2xl">
-          <h2 className="text-3xl font-bold text-center text-white mb-6">
-            Create Account
-          </h2>
+    <AuthForm title="Create Account" footer={<AuthFooter question="Already have an account?" linkText="Login here" linkTo="/login" />}>
+      <form onSubmit={handleSubmit} className="space-y-6">
+        <Input
+          id="email"
+          label="Email:"
+          type="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          required
+          autoComplete="email"
+        />
 
-          <form onSubmit={handleSubmit} className="space-y-6">
-            {/* Campo de Email */}
-            <div>
-              <label
-                htmlFor="email"
-                className="block text-sm font-medium text-gray-300 mb-2"
-              >
-                Email:
-              </label>
-              <input
-                id="email"
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                required
-                className="w-full p-3 bg-gray-700 border border-gray-600 rounded-md text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500"
-              />
-            </div>
+        <Input
+          id="username"
+          label="Username:"
+          type="text"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+          required
+          autoComplete="username"
+        />
 
-            {/* Campo de Username */}
-            <div>
-              <label
-                htmlFor="username"
-                className="block text-sm font-medium text-gray-300 mb-2"
-              >
-                Username:
-              </label>
-              <input
-                id="username"
-                type="text"
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
-                required
-                className="w-full p-3 bg-gray-700 border border-gray-600 rounded-md text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500"
-              />
-            </div>
+        <Input
+          id="password"
+          label="Password:"
+          type="password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          required
+          autoComplete="new-password"
+        />
 
-            {/* Campo de Contraseña */}
-            <div>
-              <label
-                htmlFor="password"
-                className="block text-sm font-medium text-gray-300 mb-2"
-              >
-                Password:
-              </label>
-              <input
-                id="password"
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                required
-                className="w-full p-3 bg-gray-700 border border-gray-600 rounded-md text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500"
-              />
-            </div>
+        {error && (
+          <p className="text-sm text-center text-error-light dark:text-error-dark">{error}</p>
+        )}
 
-            {/* Mensaje de Error */}
-            {error && (
-              <p className="text-red-400 text-sm text-center">{error}</p>
-            )}
-
-            {/* Botón de Submit */}
-            <button
-              type="submit"
-              disabled={loading}
-              className="w-full p-3 bg-blue-600 rounded-md font-bold text-white hover:bg-blue-700 transition-colors duration-200 disabled:bg-gray-500"
-            >
-              {loading ? 'Creating Account...' : 'Register'}
-            </button>
-          </form>
-
-          {/* Link a Login */}
-          <p className="text-center text-sm text-gray-400 mt-6">
-            Already have an account?{' '}
-            <Link to="/login" className="text-blue-400 hover:underline">
-              Login here
-            </Link>
-          </p>
-        </div>
-      </div>
-    </div>
+        <Button
+          type="submit"
+          disabled={loading}
+          className="w-full p-3 rounded-md font-bold transition-colors duration-200 disabled:bg-gray-500"
+        >
+          {loading ? 'Creating Account...' : 'Register'}
+        </Button>
+      </form>
+    </AuthForm>
   );
 }

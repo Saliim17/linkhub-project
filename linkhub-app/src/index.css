@@ -1,2 +1,101 @@
-@import "tailwindcss";
+@import './theme.css';
+@import 'tailwindcss';
 
+/*
+  Tailwind v4 inyectará sus estilos base, de componentes y de utilidades aquí.
+  A continuación, definimos nuestros propios componentes personalizados.
+*/
+
+/* ==========================================================================
+   Estilos Base Personalizados
+   ========================================================================== */
+
+@layer base {
+  html, body {
+    height: 100%;
+    /* Usamos las clases de utilidad de Tailwind para el fondo y el texto,
+       ya que se basan en las variables CSS que definimos en theme.css
+       (siempre que exista un tailwind.config.js que las mapee).
+       Como alternativa, si no hay config, podemos aplicar los estilos directamente
+       para asegurar que funcionen. */
+    background-color: var(--color-background);
+    color: var(--color-text);
+  }
+
+  input, textarea, select, button {
+    /* Estilos base para elementos de formulario. */
+    background-color: var(--color-input-bg);
+    color: var(--color-input-text);
+    border: 1px solid var(--color-input-border);
+  }
+
+  input:focus, textarea:focus, select:focus {
+    /* Estilo de foco para accesibilidad. */
+    outline: 2px solid transparent;
+    outline-offset: 2px;
+    border-color: var(--color-input-focus);
+  }
+}
+
+/* ==========================================================================
+   Componentes Personalizados
+   ========================================================================== */
+
+@layer components {
+  /*
+    Definimos el botón principal usando CSS estándar y nuestras variables de color.
+    Esto ya no depende de un tailwind.config.js para funcionar.
+  */
+  .btn-primary {
+    background-color: var(--color-button);
+    color: var(--color-text-button);
+    font-weight: 700; /* bold */
+    padding: 0.5rem 1rem; /* py-2 px-4 */
+    border-radius: 0.375rem; /* rounded-md */
+    transition: background-color 0.2s ease-in-out;
+  }
+
+  .btn-primary:hover {
+    background-color: var(--color-hover-button);
+  }
+
+  .btn-primary:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  /*
+    Definimos la variante "ghost" del botón.
+    Usa un fondo transparente y un borde del color primario.
+  */
+  .btn-ghost {
+    background-color: transparent;
+    color: var(--color-primary);
+    border: 1px solid var(--color-primary);
+    font-weight: 700;
+    padding: 0.5rem 1rem;
+    border-radius: 0.375rem;
+    transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+  }
+
+  .btn-ghost:hover {
+    background-color: var(--color-primary);
+    color: var(--color-text-button); /* Color del texto del botón primario para contraste */
+  }
+
+  .btn-ghost:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  /*
+    Definimos el componente Card para un estilo consistente.
+  */
+  .card {
+    background-color: var(--color-card-bg);
+    border-radius: 0.75rem; /* Equivalente a rounded-xl de Tailwind */
+    /* Sombra sutil que funciona bien en ambos temas */
+    box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+    transition: background-color 0.2s ease-in-out;
+  }
+}

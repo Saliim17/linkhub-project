@@ -1,6 +1,5 @@
 import { Navigate } from 'react-router-dom';
-import { validateToken } from '../utils/auth'; // Ajusta la ruta según tu proyecto
-
+import { validateToken } from '../utils/auth';
 export function ProtectedRoute({ children }: { children: React.ReactNode }) {
   const token = localStorage.getItem('linkhub_token');
 

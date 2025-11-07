@@ -33,12 +33,13 @@ jobs:
         uses: actions/add-to-project@v1.0.2
         with:
           project-url: "https://github.com/users/Saliim17/projects/3"
-          github-token: ${{ secrets.GITHUB_TOKEN }}
+          github-token: ${{ secrets.PROJECT_PAT }}
 
       - name: Assign and Add Milestone
         if: github.event.action == 'opened'
         uses: actions/github-script@v7
         with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
             const MILESTONE_TITLE = "v1.0: Frontend App";
             const { owner, repo } = context.repo;

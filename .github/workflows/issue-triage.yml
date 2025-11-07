@@ -7,10 +7,11 @@ on:
     types: [opened, edited]
 
 jobs:
-  triage-issue:
-    name: Triage New Issue
+  triage-item:
+    name: Triage New Issue/PR
     runs-on: ubuntu-latest
     permissions:
+      pull-requests: write
       contents: read
       issues: write
 
@@ -18,31 +19,46 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v4
 
-      - name: Auto Label Issues
+      - name: Auto Label
         uses: github/issue-labeler@v3.4
         with:
           configuration-path: .github/labeler.yml
           enable-versioned-regex: 0
           repo-token: ${{ secrets.GITHUB_TOKEN }}
-          include-title: 1
-          sync-labels: 1
+          include-title: true
+          sync-labels: true
+
       - name: Add to Project
+        if: github.event_name == 'issues' && github.event.action == 'opened'
         uses: actions/add-to-project@v1.0.2
         with:
           project-url: "https://github.com/users/Saliim17/projects/3"
           github-token: ${{ secrets.GITHUB_TOKEN }}
-          labeled: "Status:Todo"
 
-      - name: Assign Milestone
-        uses: actions/github-script@v6
+      - name: Assign and Add Milestone
+        if: github.event.action == 'opened'
+        uses: actions/github-script@v7
         with:
           script: |
-            const milestoneId = 2; 
-
-            await github.rest.issues.update({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
+            const MILESTONE_TITLE = "v1.0: Frontend App";
+            const { owner, repo } = context.repo;
+            
+            const updatePayload = {
+              owner,
+              repo,
               issue_number: context.issue.number,
-              assignee: context.actor,
-              milestone: milestoneId
-            });
+              assignees: [context.actor]
+            };
+            
+            const milestones = await github.rest.issues.listMilestones({ owner, repo });
+            const targetMilestone = milestones.data.find(m => m.title === MILESTONE_TITLE);
+            
+            if (!targetMilestone) {
+              console.log(`Milestone "${MILESTONE_TITLE}" not found. Skipping milestone assignment.`);
+            } else {
+              console.log(`Assigning to milestone: ${targetMilestone.title} (ID: ${targetMilestone.number})`);
+              updatePayload.milestone = targetMilestone.number;
+            }
+            
+            // 3. Ejecuta la actualización con el payload final
+            await github.rest.issues.update(updatePayload);

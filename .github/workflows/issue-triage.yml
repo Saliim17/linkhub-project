@@ -1,8 +1,10 @@
-name: Full Issue Triage
+name: Full Issue/PR Triage
 
 on:
   issues:
-    types: [opened]
+    types: [opened, edited]
+  pull_request:
+    types: [opened, edited]
 
 jobs:
   triage-issue:
@@ -17,19 +19,18 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Auto Label Issues
-        uses: actions/labeler@v5
+        uses: github/issue-labeler@v3.4
         with:
-          repo-token: ${{ secrets.GITHUB_TOKEN }}
           configuration-path: .github/labeler.yml
-          sync-labels: false
-
+          enable-versioned-regex: 0
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          include-title: 1
+          sync-labels: 1
       - name: Add to Project
-        uses: actions/add-to-project@v1.0.1
+        uses: actions/add-to-project@v1.0.2
         with:
           project-url: "https://github.com/users/Saliim17/projects/3"
-
           github-token: ${{ secrets.GITHUB_TOKEN }}
-
           labeled: "Status:Todo"
 
       - name: Assign Milestone
@@ -42,5 +43,6 @@ jobs:
               owner: context.repo.owner,
               repo: context.repo.repo,
               issue_number: context.issue.number,
+              assignee: context.actor,
               milestone: milestoneId
             });

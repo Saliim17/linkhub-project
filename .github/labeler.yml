@@ -1,6 +1,7 @@
 bug:
   - 'bug'
   - 'error'
+  - 'fix'
   - 'issue'
   - 'problem'
   - 'exception'
@@ -13,7 +14,6 @@ enhancement:
   - 'suggestion'
   - 'addition'
   - 'implement'
-  - 'new feature'
   - 'improve'
 
 documentation:
@@ -23,7 +23,6 @@ documentation:
   - 'guide'
   - 'tutorial'
   - 'instructions'
-
 question:
   - 'question'
   - 'how to'
@@ -31,9 +30,7 @@ question:
   - 'doubt'
   - 'ask'
 
-ui/ux:
-  - 'user interface'
-  - 'ux'
+ui:
   - 'ui'
   - 'design'
   - 'style'
@@ -46,18 +43,75 @@ backend:
   - 'api'
   - 'database'
   - 'db'
+  - 'prisma'
+  - 'fastify'
   - 'auth'
+  - 'jwt'
+  - 'server'
 
 frontend:
   - 'frontend'
   - 'client'
-  - 'javascript'
   - 'react'
-  - 'vue'
-  - 'angular'
-  - 'browser'
+  - 'tailwind'
+  - 'vite'
+  - 'page'
+  - 'component'
+  - 'hook'
+  - 'axios'
+
+testing:
+  - 'test'
+  - 'tests'
+  - 'testing'
+  - 'vitest'
+  - 'jest'
+  - 'testing-library'
+  - 'user-event'
+  - 'e2e'
+  - 'unit test'
+
+refactor:
+  - 'refactor'
+  - 'cleanup'
+  - 'chore'
+  - 'technical debt'
+  - 'optimization'
+
+ci/cd:
+  - 'ci'
+  - 'cd'
+  - 'github actions'
+  - 'workflow'
+  - 'workflows'
+  - 'deployment'
+  - 'build'
+
+config:
+  - 'config'
+  - 'configuration'
+  - 'setup'
+  - 'env'
+  - 'tsconfig'
+  - 'vite.config'
+  - 'tailwind.config'
 
 needs-info:
   - 'incomplete'
   - 'missing info'
   - 'more details'
+
+dependencies:
+  - 'dependencies'
+  - 'deps'
+  - 'package'
+  - 'update'
+  - 'npm'
+  - 'dependabot'
+  - 'vulnerability'
+
+good first issue:
+  - 'good first issue'
+
+help wanted:
+  - 'help wanted'

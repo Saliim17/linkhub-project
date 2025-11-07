@@ -1,5 +1,7 @@
 # 🚀 Project LinkHub
 
+[![codecov](https://codecov.io/gh/Saliim17/linkhub-project/graph/badge.svg?token=239KHSAGAO)](https://codecov.io/gh/Saliim17/linkhub-project)
+
 A Linktree clone / 'link-in-bio' profile manager built as a Full-Stack 100% TypeScript learning project.
 
 This repository is a **Full-Stack TypeScript Monorepo** containing:

@@ -1,8 +1,7 @@
 import { describe, test, expect, vi } from 'vitest';
 import '@testing-library/jest-dom';
-import { render, screen } from '@testing-library/react';
-import { MemoryRouter } from 'react-router-dom';
 import App from '../App';
+import { render, screen } from './test-utils';
 
 vi.mock('../../src/pages/LoginPage', () => ({
     LoginPage: () => <div>Login Page</div>
@@ -22,38 +21,23 @@ vi.mock('../../src/components/ProtectedRoute', () => ({
 
 describe('App Component', () => {
     test('renders login page at /login route', () => {
-        render(
-            <MemoryRouter initialEntries={['/login']}>
-                <App />
-            </MemoryRouter>
-        );
+        // Usamos nuestro render personalizado, que ya incluye MemoryRouter y ThemeProvider
+        render(<App />, { wrapperProps: { initialEntries: ['/login'] } });
         expect(screen.getByText('Login Page')).toBeInTheDocument();
     });
 
     test('renders register page at /register route', () => {
-        render(
-            <MemoryRouter initialEntries={['/register']}>
-                <App />
-            </MemoryRouter>
-        );
+        render(<App />, { wrapperProps: { initialEntries: ['/register'] } });
         expect(screen.getByText('Register Page')).toBeInTheDocument();
     });
 
     test('renders dashboard page at /dashboard route', () => {
-        render(
-            <MemoryRouter initialEntries={['/dashboard']}>
-                <App />
-            </MemoryRouter>
-        );
+        render(<App />, { wrapperProps: { initialEntries: ['/dashboard'] } });
         expect(screen.getByText('Dashboard Page')).toBeInTheDocument();
     });
 
     test('redirects root path to dashboard', () => {
-        render(
-            <MemoryRouter initialEntries={['/']}>
-                <App />
-            </MemoryRouter>
-        );
+        render(<App />, { wrapperProps: { initialEntries: ['/'] } });
         expect(screen.getByText('Dashboard Page')).toBeInTheDocument();
     });
 });

@@ -29,14 +29,14 @@ jobs:
           sync-labels: true
 
       - name: Add to Project
-        if: github.event_name == 'issues' && github.event.action == 'opened'
+        if: github.event_name == 'issues'
         uses: actions/add-to-project@v1.0.1
         with:
           project-url: "https://github.com/users/Saliim17/projects/3"
           github-token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Assign and Add Milestone
-        if: github.event.action == 'opened'
+        if: github.event_name == 'issues'
         uses: actions/github-script@v7
         with:
           script: |

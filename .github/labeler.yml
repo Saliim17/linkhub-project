@@ -1,0 +1,63 @@
+bug:
+  - 'bug'
+  - 'error'
+  - 'issue'
+  - 'problem'
+  - 'exception'
+  - 'fails'
+  - 'crash'
+
+enhancement:
+  - 'feature'
+  - 'enhancement'
+  - 'suggestion'
+  - 'addition'
+  - 'implement'
+  - 'new feature'
+  - 'improve'
+
+documentation:
+  - 'documentation'
+  - 'docs'
+  - 'readme'
+  - 'guide'
+  - 'tutorial'
+  - 'instructions'
+
+question:
+  - 'question'
+  - 'how to'
+  - 'help'
+  - 'doubt'
+  - 'ask'
+
+ui/ux:
+  - 'user interface'
+  - 'ux'
+  - 'ui'
+  - 'design'
+  - 'style'
+  - 'css'
+  - 'layout'
+
+backend:
+  - 'backend'
+  - 'server'
+  - 'api'
+  - 'database'
+  - 'db'
+  - 'auth'
+
+frontend:
+  - 'frontend'
+  - 'client'
+  - 'javascript'
+  - 'react'
+  - 'vue'
+  - 'angular'
+  - 'browser'
+
+needs-info:
+  - 'incomplete'
+  - 'missing info'
+  - 'more details'

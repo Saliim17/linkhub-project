@@ -7,7 +7,7 @@ updates:
     open-pull-requests-limit: 10   
     assignees:
      - "Saliim17"
-    auto-merge: true
+    automerge: true
     
   - package-ecosystem: "npm"     
     directory: "/linkhub-api"     
@@ -16,4 +16,4 @@ updates:
     open-pull-requests-limit: 10
     assignees:
      - "Saliim17"
-    auto-merge: true
+    automerge: true

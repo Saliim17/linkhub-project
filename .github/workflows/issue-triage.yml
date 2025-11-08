@@ -30,10 +30,11 @@ jobs:
 
       - name: Add to Project
         if: github.event_name == 'issues'
-        uses: actions/add-to-project@v1.0.1
+        uses: actions/add-to-project@v1.0.2
         with:
           project-url: "https://github.com/users/Saliim17/projects/3"
           github-token: ${{ secrets.PROJECT_PAT }}
+          labeled: 'Todo'
 
       - name: Assign and Add Milestone
         if: github.event_name == 'issues'

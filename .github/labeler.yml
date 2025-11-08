@@ -1,75 +1,47 @@
-# .github/labeler.yml - FORMATO CORRECTO (RegEx)
+bug:
+  - '(bug|error|fix|issue|problem|exception|fails|crash)'
 
-- labels: ["bug"]
-  title: '(?i)bug|error|fix|issue|problem|exception|fails|crash'
-  body: '(?i)bug|error|fix|issue|problem|exception|fails|crash'
+critical:
+  - '(critical|urgent)'
 
-- labels: ["enhancement"]
-  title: '(?i)feature|feat|enhancement|suggestion|addition|implement|improve'
-  body: '(?i)feature|feat|enhancement|suggestion|addition|implement|improve'
+enhancement:
+  - '(feature|feat|enhancement|suggestion|addition|implement|improve)'
 
-- labels: ["documentation"]
-  title: '(?i)documentation|docs|readme|guide|tutorial|instructions'
-  body: '(?i)documentation|docs|readme|guide|tutorial|instructions'
+documentation:
+  - '(documentation|docs|readme|guide|tutorial|instructions)'
 
-- labels: ["question"]
-  title: '(?i)question|how to|help|doubt|ask'
-  body: '(?i)question|how to|help|doubt|ask'
+question:
+  - '(question|how to|help|doubt|ask)'
 
-- labels: ["ui"]
-  title: '(?i)ui|design|style|styles|css|layout'
-  body: '(?i)ui|design|style|styles|css|layout'
+ui:
+  - '(ui|design|style|css|layout)'
 
-- labels: ["backend"]
-  title: '(?i)backend|server|api|database|db|prisma|fastify|auth|jwt|server'
-  body: '(?i)backend|server|api|database|db|prisma|fastify|auth|jwt|server'
+backend:
+  - '(backend|server|api|database|db|prisma|fastify|auth|jwt)'
 
-- labels: ["frontend"]
-  title: '(?i)frontend|client|react|tailwind|vite|page|component|hook|axios'
-  body: '(?i)frontend|client|react|tailwind|vite|page|component|hook|axios'
+frontend:
+  - '(frontend|client|react|tailwind|vite|page|component|hook|axios)'
 
-- labels: ["testing"]
-  title: '(?i)test|tests|testing|vitest|jest|testing-library|user-event|e2e|unit test'
-  body: '(?i)test|tests|testing|vitest|jest|testing-library|user-event|e2e|unit test'
+testing:
+  - '(test|tests|testing|vitest|jest|testing-library|user-event|e2e|unit test)'
 
-- labels: ["refactor"]
-  title: '(?i)refactor|cleanup|chore|technical debt|optimization'
-  body: '(?i)refactor|cleanup|chore|technical debt|optimization'
+refactor:
+  - '(refactor|cleanup|chore|technical debt|optimization)'
 
-- labels: ["ci/cd"]
-  title: '(?i)ci|cd|github actions|workflow|workflows|deployment|build'
-  body: '(?i)ci|cd|github actions|workflow|workflows|deployment|build'
+ci/cd:
+  - '(ci|cd|github actions|workflow|workflows|deployment|build)'
 
-- labels: ["config"]
-  title: '(?i)config|configuration|setup|env|tsconfig|vite.config|tailwind.config'
-  body: '(?i)config|configuration|setup|env|tsconfig|vite.config|tailwind.config'
+config:
+  - '(config|configuration|setup|env|tsconfig|vite\.config|tailwind\.config)'
 
-- labels: ["needs-info"]
-  title: '(?i)incomplete|missing info|more details'
-  body: '(?i)incomplete|missing info|more details'
+needs-info:
+  - '(incomplete|missing info|more details)'
 
-- labels: ["dependencies"]
-  title: '(?i)dependencies|deps|package|update|npm|dependabot|vulnerability'
-  body: '(?i)dependencies|deps|package|update|npm|dependabot|vulnerability'
+dependencies:
+  - '(dependencies|deps|package|update|npm|dependabot|vulnerability)'
 
-- labels: ["good first issue"]
-  title: '(?i)good first issue'
-  body: '(?i)good first issue'
+good first issue:
+  - '(good first issue)'
 
-- labels: ["help wanted"]
-  title: '(?i)help wanted'
-  body: '(?i)help wanted'
-
-- labels: ["duplicate"]
-  title: '(?i)duplicate'
-  body: '(?i)duplicate'
-
-- labels: ["invalid"]
-  title: '(?i)invalid'
-  body: '(?i)invalid'
-
-- labels: ["wontfix"]
-  title: '(?i)wontfix'
-  body: '(?i)wontfix'
-
-
+help wanted:
+  - '(help wanted)'

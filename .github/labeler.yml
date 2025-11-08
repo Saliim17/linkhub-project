@@ -1,47 +1,65 @@
-bug:
-  - '(bug|error|fix|issue|problem|exception|fails|crash)'
+# .github/labeler.yml (Con límites de palabra \b)
 
-critical:
-  - '(critical|urgent)'
+- labels: ["bug"]
+  title: '(?i)\b(bug|error|fix|issue|problem|exception|fails|crash)\b'
+  body: '(?i)\b(bug|error|fix|issue|problem|exception|fails|crash)\b'
 
-enhancement:
-  - '(feature|feat|enhancement|suggestion|addition|implement|improve)'
+- labels: ["critical"]
+  title: '(?i)\b(critical|urgent)\b'
+  body: '(?i)\b(critical|urgent)\b'
 
-documentation:
-  - '(documentation|docs|readme|guide|tutorial|instructions)'
+- labels: ["enhancement"]
+  title: '(?i)\b(feature|feat|enhancement|suggestion|addition|implement|improve)\b'
+  body: '(?i)\b(feature|feat|enhancement|suggestion|addition|implement|improve)\b'
 
-question:
-  - '(question|how to|help|doubt|ask)'
+- labels: ["documentation"]
+  title: '(?i)\b(documentation|docs|readme|guide|tutorial|instructions)\b'
+  body: '(?i)\b(documentation|docs|readme|guide|tutorial|instructions)\b'
 
-ui:
-  - '(ui|design|style|css|layout)'
+- labels: ["question"]
+  title: '(?i)\b(question|how to|help|doubt|ask)\b'
+  body: '(?i)\b(question|how to|help|doubt|ask)\b'
 
-backend:
-  - '(backend|server|api|database|db|prisma|fastify|auth|jwt)'
+- labels: ["ui"]
+  title: '(?i)\b(ui|design|style|css|layout)\b'
+  body: '(?i)\b(ui|design|style|css|layout)\b'
 
-frontend:
-  - '(frontend|client|react|tailwind|vite|page|component|hook|axios)'
+- labels: ["backend"]
+  title: '(?i)\b(backend|server|api|database|db|prisma|fastify|auth|jwt)\b'
+  body: '(?i)\b(backend|server|api|database|db|prisma|fastify|auth|jwt)\b'
 
-testing:
-  - '(test|tests|testing|vitest|jest|testing-library|user-event|e2e|unit test)'
+- labels: ["frontend"]
+  title: '(?i)\b(frontend|client|react|tailwind|vite|page|component|hook|axios)\b'
+  body: '(?i)\b(frontend|client|react|tailwind|vite|page|component|hook|axios)\b'
 
-refactor:
-  - '(refactor|cleanup|chore|technical debt|optimization)'
+- labels: ["testing"]
+  title: '(?i)\b(test|tests|testing|vitest|jest|testing-library|user-event|e2e|unit test)\b'
+  body: '(?i)\b(test|tests|testing|vitest|jest|testing-library|user-event|e2e|unit test)\b'
 
-ci/cd:
-  - '(ci|cd|github actions|workflow|workflows|deployment|build)'
+- labels: ["refactor"]
+  title: '(?i)\b(refactor|cleanup|chore|technical debt|optimization)\b'
+  body: '(?i)\b(refactor|cleanup|chore|technical debt|optimization)\b'
 
-config:
-  - '(config|configuration|setup|env|tsconfig|vite\.config|tailwind\.config)'
+- labels: ["ci/cd"]
+  title: '(?i)\b(ci|cd|github actions|workflow|workflows|deployment|build)\b'
+  body: '(?i)\b(ci|cd|github actions|workflow|workflows|deployment|build)\b'
 
-needs-info:
-  - '(incomplete|missing info|more details)'
+- labels: ["config"]
+  title: '(?i)\b(config|configuration|setup|env|tsconfig|vite\.config|tailwind\.config)\b'
+  body: '(?i)\b(config|configuration|setup|env|tsconfig|vite\.config|tailwind\.config)\b'
 
-dependencies:
-  - '(dependencies|deps|package|update|npm|dependabot|vulnerability)'
+- labels: ["needs-info"]
+  title: '(?i)\b(incomplete|missing info|more details)\b'
+  body: '(?i)\b(incomplete|missing info|more details)\b'
 
-good first issue:
-  - '(good first issue)'
+- labels: ["dependencies"]
+  title: '(?i)\b(dependencies|deps|package|npm|dependabot|vulnerability)\b'
+  body: '(?i)\b(dependencies|deps|package|npm|dependabot|vulnerability)\b'
 
-help wanted:
-  - '(help wanted)'
+- labels: ["good first issue"]
+  title: '(?i)\b(good first issue)\b'
+  body: '(?i)\b(good first issue)\b'
+
+- labels: ["help wanted"]
+  title: '(?i)\b(help wanted)\b'
+  body: '(?i)\b(help wanted)\b'
